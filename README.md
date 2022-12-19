@@ -1,7 +1,7 @@
  - [About](#About)
  - [Setup](#Setup)
- - [Using the Updater](#Updater)
- - [Configuration file](#Configuration)
+ - [Using the Updater](#using-the-updater)
+ - [Configuration file](#configuration-file)
 	 - [[CONFIG]](#Config)
 	 - [[LEADERBOARDS]](#Leaderboards)
 
