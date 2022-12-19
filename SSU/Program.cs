@@ -10,6 +10,7 @@ class Program
     /// <param name="args">Both optional, first is the config path, second is the loop period in minutes.</param>
     public static void Main(string[] args)
     {
+        Console.OutputEncoding = System.Text.Encoding.UTF8;
         string configPath = "";
         int timer = 60 * 60 * 1000; // 60 minutes - 3 600 seconds - 3 600 000 miliseconds
 

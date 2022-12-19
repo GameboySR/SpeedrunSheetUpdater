@@ -146,7 +146,7 @@ namespace IL_Loader
                         
                         if (leaderboard == null || leaderboard.data == null)
                         {
-                            Console.WriteLine("Skipping leaderboard...");
+                            Console.WriteLine("Skipping leaderboard…");
                             result.Add(null);
                              continue;
                         }
@@ -188,7 +188,7 @@ namespace IL_Loader
                 if (leaderboard == null || leaderboard.data == null)
                 {
                     Console.WriteLine("Failed to fetch leaderboard: " + line);
-                    Console.WriteLine("Retrying in " + 5 * i + " seconds...");
+                    Console.WriteLine("Retrying in " + 5 * i + " seconds…");
                     Thread.Sleep(5 * i * 1000);
                     continue;
                 }
@@ -222,8 +222,8 @@ namespace IL_Loader
             {
                 return;
             }
-
-            //format times
+            
+            // format times
             if (leaderboard.run.times.realtime != null)
             {
                 leaderboard.run.times.realtime = FormatTime(leaderboard.run.times.realtime);

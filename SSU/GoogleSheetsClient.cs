@@ -105,14 +105,14 @@ namespace IL_Loader
                     string lockString = (string)list[(int)parameters["lock"][0] - range[0][0]];
                     bool locked = false;
 
-                    if (lockString != null && lockString != "" && bool.TryParse(lockString, out bool _))
+                    if (lockString != null)
                     {
-                        locked = bool.Parse(lockString);
+                        locked = lockString == "yes";
                     }
                     
                     if (locked)
                     {
-                        Console.WriteLine(data!.data!.level + " is locked, skipping...");
+                        Console.WriteLine(data!.data!.level + " is locked, skipping…");
                         return;
                     }
                 }
@@ -125,7 +125,7 @@ namespace IL_Loader
 
             if (oldValue != "" && !CompareTimes(oldValue, GetPrimaryTime(parameters["primarytime"], data)))
             {
-                Console.WriteLine(data!.data!.level + " is already up to date, skipping...");
+                Console.WriteLine(data!.data!.level + " is already up to date, skipping…");
                 return;
             }
 
@@ -244,7 +244,7 @@ namespace IL_Loader
                     return data.data!.runs![0].run!.date ?? "";
 
                 case "emulator":
-                    return data.data!.runs![0].run!.system!.emulated.ToString() ?? "";
+                    return data.data!.runs![0].run!.system!.emulated ? "yes" : "no";
 
                 case "ingametime":
                     return data.data!.runs![0]!.run!.times!.ingame ?? "";
