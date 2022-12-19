@@ -1,0 +1,80 @@
+[CONFIG]
+spreadsheet=your_spreadsheet|sheet_name
+game=r3
+emulatorallowed=true
+realtimeloadless=I2
+emulator=C2
+ingametime=D2
+lock=E2
+platform=F2
+player=G2
+level=A2
+comment=L2
+primarytime=realtime
+realtime=H2
+date=B2
+region=J2
+videolink=K2
+verifiedonly=true
+subcategory=e8mq2zen.klr20eo1
+[LEADERBOARDS]
+#Fairy Council
+o9xl5839-xk90g5yk
+4958o3m9-xk90g5yk
+rdq12po9-xk90g5yk
+5d73knq9-xk90g5yk
+kwjelx09-xk90g5yk
+#Teensie Highway 1
+owo21ojd-xk90g5yk
+#Clearleaf Forest
+xd15ekzw-xk90g5yk
+ewpqm1y9-xk90g5yk
+y9mpq7z9-xk90g5yk
+5wkrz5v9-xk90g5yk
+592og27d-xk90g5yk
+#Teensie Highway 2
+29vke4qd-xk90g5yk
+#Bog of Murk
+xd4374q9-xk90g5yk
+xd07rmmw-xk90g5yk
+rw6np8pd-xk90g5yk
+n93g552d-xk90g5yk
+z988vvr9-xk90g5yk
+rdnpjj59-xk90g5yk
+#The Land of the Livid Dead
+ldyp77pd-xk90g5yk
+gdrq44e9-xk90g5yk
+nwl7xxo9-xk90g5yk
+ywe8kklw-xk90g5yk
+69z4ooxw-xk90g5yk
+#Teensie Highway 3
+r9g300jw-xk90g5yk
+#The Desert of the Knaaren
+o9xl5539-xk90g5yk
+4958oom9-xk90g5yk
+rdq122o9-xk90g5yk
+5d73kkq9-xk90g5yk
+kwjell09-xk90g5yk
+owo211jd-xk90g5yk
+xd15eezw-xk90g5yk
+ewpqmmy9-xk90g5yk
+#The Longest Shortcut
+y9mpqqz9-xk90g5yk
+5wkrzzv9-xk90g5yk
+592ogg7d-xk90g5yk
+#The Summit Beyond the Clouds
+29vkeeqd-xk90g5yk
+xd4377q9-xk90g5yk
+xd07rrmw-xk90g5yk
+#Hoodlum Headquarters
+rw6npppd-xk90g5yk
+n937222d-xk90g5yk
+z98622rd-xk90g5yk
+rdn0kk5w-xk90g5yk
+ldyy44pd-xk90g5yk
+#The Tower of the Leptys
+n937227d-xk90g5yk
+z986227d-xk90g5yk
+rdn0kknw-xk90g5yk
+ldyy44jd-xk90g5yk
+gdrekk89-xk90g5yk
