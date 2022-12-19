@@ -1,6 +1,6 @@
  - [About](#About)
  - [Setup](#Setup)
- - [Using the Updater](#Using)
+ - [Using the Updater](#Updater)
  - [Configuration file](#Configuration)
 	 - [[CONFIG]](#Config)
 	 - [[LEADERBOARDS]](#Leaderboards)
@@ -26,7 +26,7 @@ Copy the path to the JSON secret file (feel free to rename the file beforehand) 
 **Because of this, you might have to run the Updater as administrator.**
 
 
-# Using the Updater<a name="Using"></a>
+# Using the Updater<a name="Updater"></a>
 Once you have created the Environment variable with your JSON file, you will also need to create a *configuration* file. You can use the one from the repository as a base and modify it to your liking. The structure and option will also be described bellow.
 
 You have a few options how to run the app. You can:
@@ -72,14 +72,14 @@ Lastly, there are the Cell parameters. The cell marks the beginning position of 
  - `date=A1`
 	 - returns the date when the run was submitted
  - `emulator=A1`
-	 - returns TRUE/FALSE based on whether the run was done on an emulator
+	 - returns "yes"/"no" based on whether the run was done on an emulator
  - `ingametime=A1`
 	 - returns the in-game time
  - `level=A1`
 	 - returns the name of the leaderboard
  - `lock=A1`
 	 - checks whether the row in the Spreadsheet is locked
-	 - values in this column have a form of TRUE/FALSE and are added by the user
+	 - values in this column have a form of "yes"/anything_else and are added by the user
  - `platform=A1`
 	 - returns the name of the platform the run was done on (GameCube, PS1…)
  - `player=A1`
