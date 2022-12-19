@@ -112,7 +112,7 @@ namespace IL_Loader
                     
                     if (locked)
                     {
-                        Console.WriteLine(data!.data!.level + " is locked, skipping…");
+                        Console.WriteLine(data!.data!.level + " is locked, skipping...");
                         return;
                     }
                 }
@@ -125,7 +125,7 @@ namespace IL_Loader
 
             if (oldValue != "" && !CompareTimes(oldValue, GetPrimaryTime(parameters["primarytime"], data)))
             {
-                Console.WriteLine(data!.data!.level + " is already up to date, skipping…");
+                Console.WriteLine(data!.data!.level + " is already up to date, skipping...");
                 return;
             }
 
