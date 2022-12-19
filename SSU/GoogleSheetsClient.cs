@@ -238,37 +238,37 @@ namespace IL_Loader
             switch(item)
             {
                 case "comment":
-                    return data.data!.runs![0].run!.comment ?? "empty";
+                    return data.data!.runs![0].run!.comment ?? "";
 
                 case "date":
-                    return data.data!.runs![0].run!.date ?? "empty";
+                    return data.data!.runs![0].run!.date ?? "";
 
                 case "emulator":
-                    return data.data!.runs![0].run!.system!.emulated.ToString() ?? "empty";
+                    return data.data!.runs![0].run!.system!.emulated.ToString() ?? "";
 
                 case "ingametime":
-                    return data.data!.runs![0]!.run!.times!.ingame ?? "empty";
+                    return data.data!.runs![0]!.run!.times!.ingame ?? "";
 
                 case "level":
-                    return data.data!.level ?? "empty";
+                    return data.data!.level ?? "";
 
                 case "platform":
-                    return data.data!.runs![0].run!.system!.platform ?? "empty";
+                    return data.data!.runs![0].run!.system!.platform ?? "";
 
                 case "player":
-                    return data.data!.runs![0].run!.players![0].uri ?? "empty";
+                    return data.data!.runs![0].run!.players![0].uri ?? "";
 
                 case "realtime":
-                    return data.data!.runs![0].run!.times!.realtime ?? "empty";
+                    return data.data!.runs![0].run!.times!.realtime ?? "";
 
                 case "realtimeloadless":
-                    return data.data!.runs![0].run!.times!.realtime_noloads ?? "empty";
+                    return data.data!.runs![0].run!.times!.realtime_noloads ?? "";
 
                 case "region":
-                    return data.data!.runs![0].run!.system!.region ?? "empty";
+                    return data.data!.runs![0].run!.system!.region ?? "";
 
                 case "videolink":
-                    return data.data!.runs![0].run!.videos!.links![0].uri ?? "empty";
+                    return data.data!.runs![0].run!.videos!.links![0].uri ?? "";
 
                 default:
                     return "";

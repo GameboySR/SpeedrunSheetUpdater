@@ -146,7 +146,6 @@ namespace IL_Loader
                         
                         if (leaderboard == null || leaderboard.data == null)
                         {
-                            Console.Error.WriteLine("Failed to fetch leaderboard: " + line);
                             Console.WriteLine("Skipping leaderboard…");
                             result.Add(null);
                              continue;
@@ -188,7 +187,7 @@ namespace IL_Loader
 
                 if (leaderboard == null || leaderboard.data == null)
                 {
-                    Console.Error.WriteLine("Failed to fetch leaderboard: " + line);
+                    Console.WriteLine("Failed to fetch leaderboard: " + line);
                     Console.WriteLine("Retrying in " + 5 * i + " seconds…");
                     Thread.Sleep(5 * i * 1000);
                     continue;
@@ -492,7 +491,7 @@ namespace IL_Loader
 
             if (parts.Length != 2)
             {
-                Console.Error.WriteLine("Invalid [CONFIG] parameter format: \"" + line + '"');
+                Console.WriteLine("Invalid [CONFIG] parameter format: \"" + line + '"');
                 return;
             }
 
@@ -503,7 +502,7 @@ namespace IL_Loader
             {
                 if (!IsCell(parts[1]))
                 {
-                    Console.Error.WriteLine("Invalid Sheet cell format in [CONFIG]: \"" + line + '"');
+                    Console.WriteLine("Invalid Sheet cell format in [CONFIG]: \"" + line + '"');
                     return;
                 }
             }

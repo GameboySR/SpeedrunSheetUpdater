@@ -14,8 +14,8 @@ namespace IL_Loader
     public class Data
     {
         public List<LeaderboardEntry>? runs { get; set; } = null;
-        public string? level { get; set; } = "empty";
-        public string? timing { get; set; } = "empty";
+        public string? level { get; set; } = null;
+        public string? timing { get; set; } = null;
     }
 
     public class LeaderboardEntry
@@ -27,10 +27,10 @@ namespace IL_Loader
     public class Run
     {
         public Video? videos { get; set; } = null;
-        public string? comment { get; set; } = "empty";
+        public string? comment { get; set; } = null;
         public Status? status { get; set; } = null;
         public List<Player>? players { get; set; } = null;
-        public string? date { get; set; } = "empty";
+        public string? date { get; set; } = null;
         public RunSystem? system { get; set; } = null;
         public Time? times { get; set; } = null;
         public Dictionary<string, string>? values { get; set; } = null;
@@ -43,36 +43,36 @@ namespace IL_Loader
 
     public class Link
     {
-        public string? uri { get; set; } = "empty";
+        public string? uri { get; set; } = null;
     }
 
     public class Status
     {
-        public string? status { get; set; } = "empty";
-        public string? examiner { get; set; } = "empty";
+        public string? status { get; set; } = null;
+        public string? examiner { get; set; } = null;
 
         [JsonProperty(PropertyName = "verify-date")]
-        public string? verify_date { get; set; } = "empty";
+        public string? verify_date { get; set; } = null;
     }
 
     public class Player
     {
-        public string? uri { get; set; } = "empty";
+        public string? uri { get; set; } = null;
     }
 
     public class RunSystem
     {
-        public string? platform { get; set; } = "empty";
+        public string? platform { get; set; } = null;
         public bool emulated { get; set; } = false;
-        public string? region { get; set; } = "empty";
+        public string? region { get; set; } = null;
     }
 
     public class Time
     {
-        public string? primary { get; set; } = "empty";
-        public string? realtime { get; set; } = "empty";
-        public string? realtime_noloads { get; set; } = "empty";
-        public string? ingame { get; set; } = "empty";
+        public string? primary { get; set; } = null;
+        public string? realtime { get; set; } = null;
+        public string? realtime_noloads { get; set; } = null;
+        public string? ingame { get; set; } = null;
     }
 
     public class Platform
@@ -82,7 +82,7 @@ namespace IL_Loader
 
     public class PlatformData
     {
-        public string? name { get; set; } = "empty";
+        public string? name { get; set; } = null;
     }
 
     public class FetchedPlayer
@@ -92,7 +92,7 @@ namespace IL_Loader
 
     public class PlayerData
     {
-        public string? weblink { get; set; } = "empty";
+        public string? weblink { get; set; } = null;
     }
 
     public class Region
@@ -102,7 +102,7 @@ namespace IL_Loader
 
     public class RegionData
     {
-        public string? name { get; set; } = "empty";
+        public string? name { get; set; } = null;
     }
 
     public class Level
@@ -112,6 +112,6 @@ namespace IL_Loader
 
     public class LevelData
     {
-        public string? name { get; set; } = "empty";
+        public string? name { get; set; } = null;
     }
 }
