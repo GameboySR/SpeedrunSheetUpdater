@@ -11,6 +11,9 @@ class Program
     public static void Main(string[] args)
     {
         Console.OutputEncoding = System.Text.Encoding.UTF8;
+        Console.WriteLine("\nSpeedrun Spreadsheet Updater");
+        Console.WriteLine("\n====================================\n");
+
         string configPath = "";
         int timer = 60 * 60 * 1000; // 60 minutes - 3 600 seconds - 3 600 000 miliseconds
 
@@ -31,6 +34,7 @@ class Program
         HttpClient client = new HttpClient();
         client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         Config config = new Config(configPath, ref client);
+        config.Parse();
 
         MainLoop(ref client, ref config, timer);
     }
@@ -41,7 +45,7 @@ class Program
         {
             try
             {
-                var leaderboards = config.Parse();
+                var leaderboards = config.FetchLeaderboards();
                 GoogleSheetsClient sheetClient = new GoogleSheetsClient(config.Parameters["spreadsheet"]);
 
                 foreach (var leaderboard in leaderboards)
@@ -63,6 +67,12 @@ class Program
                     " has been updated.\n\n" +
                     "Next update will be at " + DateTime.Now.AddMilliseconds(timer) +
                     "\n\n====================================\n");
+
+                // resetting cell-related variables
+                // back to the starting cells from the config file
+                config.ResetParameters();
+                config.GetRange();
+
                 Thread.Sleep(timer);
             }
             catch (FormatException ex)

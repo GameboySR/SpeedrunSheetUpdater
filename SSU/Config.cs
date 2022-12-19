@@ -33,12 +33,14 @@ namespace IL_Loader
         ///<para>private bool _verifiedOnly = false;                     | verifiedonly=true</para>
         /// </summary>
         public Dictionary<string, string> Parameters = new Dictionary<string, string>();
-        public List<string> Range = new List<string>();
+        public List<string> Range = new List<string>( new List<string> { "", "", ""} );
 
         private bool _configParsed = false;
         private bool _emulator = true;
         private bool _verifiedOnly = false;
         private readonly string _path;
+        private List<string> _leaderboards = new List<string>();
+        private Dictionary<string, string>  _resetParameters = new Dictionary<string, string>();
 
         private readonly string LEADERBOARD_LINK = @"https://www.speedrun.com/api/v1/leaderboards/";
         private readonly string LEVEL_LINK = @"https://www.speedrun.com/api/v1/levels/";
@@ -63,10 +65,8 @@ namespace IL_Loader
         /// Maybe later
         /// </summary>
         /// <returns>A list of processed leaderboards data.</returns>
-        public List<LeaderboardData?> Parse()
+        public void Parse()
         {
-            List<LeaderboardData?> result = new List<LeaderboardData?>();
-
             using (var fileStream = File.OpenRead(_path))
             {
                 using (var reader = new StreamReader(fileStream, Encoding.UTF8, true))
@@ -90,6 +90,11 @@ namespace IL_Loader
                             if (line.StartsWith("[LEADERBOARDS]"))
                             {
                                 _configParsed = true;
+                                // save an untouched copy for next runs
+                                _resetParameters = Parameters.ToDictionary(
+                                    keyValue => keyValue.Key,
+                                    keyValue => keyValue.Value
+                                    );
 
                                 // check if necessary parts of config are there
                                 if (!Parameters.ContainsKey("game") ||
@@ -113,21 +118,15 @@ namespace IL_Loader
                                 {
                                     _verifiedOnly = true;
                                 }
-                                
-                                // get range for Spreadsheet call
-                                // first to values are beginning and end of the row range
-                                // third value is the primary time cell index within all cells
-                                var sorted = Parameters.Values.Where(value => char.IsUpper(value[0]) && char.IsDigit(value[1])).ToList();
-                                sorted.Sort();
-                                Range.Add(sorted[0]);
-                                Range.Add(sorted[sorted.Count - 1]);
+
+                                GetRange();
                                 int index = 0;
 
                                 foreach (var pair in Parameters)
                                 {
                                     if (pair.Key == Parameters["primarytime"])
                                     {
-                                        Range.Add(index.ToString());
+                                        Range[2] = index.ToString();
                                         break;
                                     }
                                     index++;
@@ -135,68 +134,92 @@ namespace IL_Loader
 
                                 Console.WriteLine("Emulator runs: " + (_emulator ? "enabled." : "disabled."));
                                 Console.WriteLine("Verfied-only runs: " + (_verifiedOnly ? "enabled." : "disabled."));
-                                Console.WriteLine("Config successfully parsed.\n\n====================================\n");
+                                Console.WriteLine("\n====================================\n");
                                 continue;
                             }
                             ParseConfig(line);
                             continue;
                         }
 
-                        var leaderboard = FetchLeaderboard(line);
-                        
-                        if (leaderboard == null || leaderboard.data == null)
-                        {
-                            Console.WriteLine("Skipping leaderboard…");
-                            result.Add(null);
-                             continue;
-                        }
-
-                        GetFastestRun(leaderboard);
-                        leaderboard.data.level = FormatLeaderboardName(leaderboard.data.level);
-
-                        if (leaderboard.data.runs == null)
-                        {
-                            Console.WriteLine("No elligible runs for " + leaderboard.data.level);
-                            result.Add(null);
-                            continue;
-                        }
-
-                        FormatLeaderboard(leaderboard.data.runs[0]);
-                        result.Add(leaderboard);
-                        Console.WriteLine(leaderboard.data.level + " successully formatted.");
+                        _leaderboards.Add(line);
                     }
-                    Console.WriteLine("All elligible leaderboards successfully formatted.\n\n====================================\n");
+                    Console.WriteLine("Configuration loaded.\n\n====================================\n");
                 }
             }
-
-            return result;
         }
 
         /// <summary>
         /// Makes 3 attempts at fetching the leaderboard info,
-        /// waiting 5 and 10 seconds between each attempt
+        /// waiting 5 and 10 seconds between each attempt.
         /// </summary>
-        /// <param name="line">Leaderboard ID</param>
-        /// <returns></returns>
-        private LeaderboardData? FetchLeaderboard(string line)
+        /// <returns>Formatted list of the fastest elligible leaderboard runs.</returns>
+        public List<LeaderboardData?> FetchLeaderboards()
         {
-            for (int i = 1; i < 3; i++)
+            List<LeaderboardData?> result = new List<LeaderboardData?>();
+            LeaderboardData? leaderboard = null;
+
+            foreach (string line in _leaderboards)
             {
-                var leaderboard = SendRequest(LEADERBOARD_LINK + BuildLeaderboardRequestParams(line))
-                .Content.ReadAsAsync<LeaderboardData>().Result;
+                // try to fetch each leaderboard 3 times max
+                for (int i = 1; i < 3; i++)
+                {
+                    leaderboard = SendRequest(LEADERBOARD_LINK + BuildLeaderboardRequestParams(line))
+                    .Content.ReadAsAsync<LeaderboardData>().Result;
+
+                    if (leaderboard == null || leaderboard.data == null)
+                    {
+                        Console.WriteLine("Failed to fetch leaderboard: " + line);
+                        Console.WriteLine("Retrying in " + 5 * i + " seconds…");
+                        Thread.Sleep(5 * i * 1000);
+                        continue;
+                    }
+
+                    GetFastestRun(leaderboard);
+                    leaderboard.data.level = FormatLeaderboardName(leaderboard.data.level);
+
+                    if (leaderboard.data.runs == null)
+                    {
+                        Console.WriteLine("No elligible runs for " + leaderboard.data.level);
+                        result.Add(null);
+                        break;
+                    }
+
+                    FormatLeaderboard(leaderboard.data.runs[0]);
+                    result.Add(leaderboard);
+                    Console.WriteLine(leaderboard.data.level + " successully formatted.");
+                    break;
+                }
 
                 if (leaderboard == null || leaderboard.data == null)
                 {
-                    Console.WriteLine("Failed to fetch leaderboard: " + line);
-                    Console.WriteLine("Retrying in " + 5 * i + " seconds…");
-                    Thread.Sleep(5 * i * 1000);
-                    continue;
+                    Console.WriteLine("Skipping leaderboard…");
+                    result.Add(null);
                 }
-
-                return leaderboard;
             }
 
-            return null;
+            Console.WriteLine("\nAll elligible leaderboards fetched.\n\n====================================\n");
+            return result;
+        }
+
+        public void GetRange()
+        {
+            // get range for Spreadsheet call
+            // first to values are beginning and end of the row range
+            // third value is the primary time cell index within all cells
+            var sorted = Parameters.Values.Where(value => char.IsUpper(value[0]) && char.IsDigit(value[1])).ToList();
+            sorted.Sort();
+            Range[0] = sorted[0];
+            Range[1] = sorted[sorted.Count - 1];
+        }
+
+        public void ResetParameters()
+        {
+            // get the starting columns back
+            Parameters.Clear();
+            Parameters = _resetParameters.ToDictionary(
+                keyValue => keyValue.Key,
+                keyValue => keyValue.Value
+                );
         }
 
         /// <summary>
