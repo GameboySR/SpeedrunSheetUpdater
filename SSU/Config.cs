@@ -201,6 +201,11 @@ namespace IL_Loader
             return result;
         }
 
+        public void SetClient(ref HttpClient client)
+        {
+            _client = client;
+        }
+
         public void GetRange()
         {
             // get range for Spreadsheet call

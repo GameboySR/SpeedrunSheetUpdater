@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ulUVdWZHDkgaoyaB+jFWXoH6AmOhSkGeNWCEkZVHW2lMoOKD5//ldJVxiVjaDUJx1oNDt+PH70EtvdHGnxsM/w==",
+  "dgSpecHash": "6n3qX3TFCjF4RSpSuURpAPGqgRp7CvScDXU414DAvT2+Qud3KFQ/BWBe99yPjjfjfjX9w9V0dB4uuW4NHX07AQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Martin\\source\\repos\\SSU\\SSU\\SSU.csproj",
+  "projectFilePath": "C:\\Users\\Martin\\source\\repos\\SpeedrunSheetUpdater\\SSU\\SSU.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Martin\\.nuget\\packages\\google.apis\\1.58.0\\google.apis.1.58.0.nupkg.sha512",
     "C:\\Users\\Martin\\.nuget\\packages\\google.apis.auth\\1.58.0\\google.apis.auth.1.58.0.nupkg.sha512",

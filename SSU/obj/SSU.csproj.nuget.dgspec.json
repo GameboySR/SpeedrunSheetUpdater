@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Martin\\source\\repos\\SSU\\SSU\\SSU.csproj": {}
+    "C:\\Users\\Martin\\source\\repos\\SpeedrunSheetUpdater\\SSU\\SSU.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Martin\\source\\repos\\SSU\\SSU\\SSU.csproj": {
+    "C:\\Users\\Martin\\source\\repos\\SpeedrunSheetUpdater\\SSU\\SSU.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Martin\\source\\repos\\SSU\\SSU\\SSU.csproj",
+        "projectUniqueName": "C:\\Users\\Martin\\source\\repos\\SpeedrunSheetUpdater\\SSU\\SSU.csproj",
         "projectName": "SSU",
-        "projectPath": "C:\\Users\\Martin\\source\\repos\\SSU\\SSU\\SSU.csproj",
+        "projectPath": "C:\\Users\\Martin\\source\\repos\\SpeedrunSheetUpdater\\SSU\\SSU.csproj",
         "packagesPath": "C:\\Users\\Martin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Martin\\source\\repos\\SSU\\SSU\\obj\\",
+        "outputPath": "C:\\Users\\Martin\\source\\repos\\SpeedrunSheetUpdater\\SSU\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

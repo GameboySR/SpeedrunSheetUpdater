@@ -1,6 +1,7 @@
 ﻿using IL_Loader;
 
 using System.Net.Http.Headers;
+using System.Reflection;
 
 class Program
 {
@@ -11,7 +12,8 @@ class Program
     public static void Main(string[] args)
     {
         Console.OutputEncoding = System.Text.Encoding.UTF8;
-        Console.WriteLine("\nSpeedrun Spreadsheet Updater");
+        Console.WriteLine("\nSpeedrun Spreadsheet Updater " +
+            Assembly.GetExecutingAssembly().GetName().Version!.ToString(3));
         Console.WriteLine("\n====================================\n");
 
         string configPath = "";
@@ -36,13 +38,20 @@ class Program
         Config config = new Config(configPath, ref client);
         config.Parse();
 
-        MainLoop(ref client, ref config, timer);
+        MainLoop(ref config, timer);
     }
 
-    private static void MainLoop(ref HttpClient client, ref Config config, int timer)
+    private static void MainLoop(ref Config config, int timer)
     {
         while (true)
         {
+            // clean up things that went out of scope after each cycle
+            GC.Collect();
+
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            config.SetClient(ref client);
+
             try
             {
                 var leaderboards = config.FetchLeaderboards();
@@ -60,6 +69,7 @@ class Program
                     sorted.Sort();
                     config.Range[0] = sorted[0];
                     config.Range[1] = sorted[sorted.Count - 1];
+                    sorted.Clear();
                 }
 
                 Console.WriteLine("\nSheet: " +
@@ -72,6 +82,10 @@ class Program
                 // back to the starting cells from the config file
                 config.ResetParameters();
                 config.GetRange();
+                // resetting clients and leaderboards to prevent memory growth
+                client.Dispose();
+                sheetClient.ResetService();
+                leaderboards.Clear();
 
                 Thread.Sleep(timer);
             }

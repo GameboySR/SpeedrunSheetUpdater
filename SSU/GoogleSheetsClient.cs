@@ -56,6 +56,16 @@ namespace IL_Loader
             }
         }
 
+        public void ResetService()
+        {
+            _sheetsService!.Dispose();
+            _sheetsService = new SheetsService(new BaseClientService.Initializer
+            {
+                HttpClientInitializer = _userCredential,
+                ApplicationName = NAME
+            });
+        }
+
         /// <summary>
         /// 
         /// </summary>
