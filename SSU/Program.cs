@@ -88,6 +88,7 @@ class Program
                 leaderboards.Clear();
 
                 Thread.Sleep(timer);
+                Console.Clear();
             }
             catch (FormatException ex)
             {
