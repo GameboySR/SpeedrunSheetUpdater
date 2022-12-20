@@ -5,3 +5,5 @@
 /SSU/bin
 /.vs
 /SSU/Properties
+/SSU/obj/Release/net6.0
+/SSU/obj/Debug/net6.0
