@@ -8,7 +8,7 @@
 # About<a name="About"></a>
 This app serves for periodic fetching of the fastest runs in the given speedrun.com leaderboards, formatting the information and uploading it to a Google Spreadsheet. This is primarily made for IL leaderboards, where the user can make a Spreadsheet for the fastest times from each IL leaderboard and keep the app running to update the Spreadsheet as new and faster runs are added to the speedrun.com leaderboards.
 
-The idea is that the Spreadsheet will consist of rows [A-Z], where each row corresponds with one single run.
+The idea is that the Spreadsheet will consist of rows [A-Z], where each row corresponds with one single run. Check the example to see what the example config looks like when executed: [Example spreadsheet](https://docs.google.com/spreadsheets/d/1jV91JxlH51oVUJSYv_nHfUId7UeQvJJfOQ-ppUH6XgU/edit?usp=sharing)
 
 # Setup<a name="Setup"></a>
 
